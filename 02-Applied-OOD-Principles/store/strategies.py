@@ -22,9 +22,16 @@ class BitcoinStrategy:
         return f"paid_by_bitcoin:{amount:.2f}"
 
 
+class CashStrategy:
+    def process(self, customer_data: dict, amount: float) -> str:
+        print(f"[payment] Cash payment received: {amount:.2f}")
+        return f"paid_by_cash:{amount:.2f}"
+
+
 def build_payment_strategies():
     return {
         "credit_card": CreditCardStrategy(),
         "paypal": PayPalStrategy(),
         "bitcoin": BitcoinStrategy(),
+        "cash": CashStrategy(),
     }
