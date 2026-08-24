@@ -20,5 +20,9 @@ class PaymentProcessor:
             print(f"[payment] Charging BTC {address} {amount:.2f}")
             return f"paid_by_bitcoin:{amount:.2f}"
 
+        elif method == "cash":
+            print(f"[payment] Cash payment received: {amount:.2f}")
+            return f"paid_by_cash:{amount:.2f}"
+
         else:
             raise ValueError(f"Unknown payment method: {method!r}")
