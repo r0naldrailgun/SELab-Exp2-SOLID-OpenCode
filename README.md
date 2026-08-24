@@ -15,8 +15,7 @@
 
 برای اینکه اثر SOLID فقط در سطح نظری بررسی نشود، قابلیت جدید پرداخت نقدی (`cash`) دو بار به پروژه اضافه شد:
 
-1. یک بار روی نسخه اولیه و بدون اصلاح معماری؛
-2. یک بار پس از Refactoring نسخه دوم بر اساس اصول SOLID.
+یک بار روی نسخه اولیه و بدون اصلاح معماری؛ یک بار پس از Refactoring نسخه دوم بر اساس اصول SOLID.
 
 در پایان، میزان و نوع تغییرات لازم برای افزودن همان قابلیت در دو معماری مقایسه شد. این مقایسه نشان می‌دهد مزیت SOLID لزوماً «کم‌شدن تعداد خطوط کد» نیست، بلکه مهم‌تر از آن محدودشدن محل اثر تغییر، کاهش coupling و امکان افزودن رفتار جدید بدون دست‌کاری منطق مرکزی موجود است.
 
@@ -115,14 +114,7 @@
 
 پیش از شروع Refactoring، مفاهیم اصلی مورد نیاز برای آزمایش بررسی شدند:
 
-- نصب و اجرای OpenCode؛
-- اتصال مدل زبانی و انتخاب مدل؛
-- فایل `AGENTS.md` برای دادن context و قوانین پایدار پروژه به Agent؛
-- مفهوم Agent و تفاوت نقش تحلیل/برنامه‌ریزی با اجرای تغییر؛
-- Skill برای تعریف workflow تخصصی پروژه؛
-- استفاده از Plan mode برای تحلیل و طراحی قبل از edit؛
-- استفاده از Build mode برای اعمال Plan تأییدشده؛
-- نوشتن Promptهای صریح درباره scope، محدودیت‌ها، خروجی مورد انتظار و شرط تأیید انسانی.
+نصب و اجرای OpenCode؛ اتصال مدل زبانی و انتخاب مدل؛ فایل `AGENTS.md` برای دادن context و قوانین پایدار پروژه به Agent؛ مفهوم Agent و تفاوت نقش تحلیل/برنامه‌ریزی با اجرای تغییر؛ Skill برای تعریف workflow تخصصی پروژه؛ استفاده از Plan mode برای تحلیل و طراحی قبل از edit؛ استفاده از Build mode برای اعمال Plan تأییدشده؛ نوشتن Promptهای صریح درباره scope، محدودیت‌ها، خروجی مورد انتظار و شرط تأیید انسانی.
 
 ### تجربه عملی نصب روی Windows
 
@@ -136,13 +128,7 @@ OpenCode از طریق npm نصب شد. در PowerShell به دلیل Execution 
 
 فایل `AGENTS.md` برای جلوگیری از اشتباه Agent در ترتیب آزمایش ایجاد شد. مهم‌ترین قواعد ثبت‌شده عبارت‌اند از:
 
-- نسخه `01-Without-OOD-Principles` هنگام اضافه‌کردن Cash نباید Refactor شود؛
-- در نسخه `02-Applied-OOD-Principles` ابتدا SOLID اعمال شود و سپس Cash اضافه شود؛
-- پیاده‌سازی Cash از نسخه اول نباید مستقیماً به نسخه دوم کپی شود؛
-- قبل از تغییر کد، Agent باید تغییرات پیشنهادی را توضیح دهد و منتظر تأیید بماند؛
-- رفتار `credit_card`، `paypal` و `bitcoin` باید حفظ شود؛
-- پس از تغییرات، `python -m store.main` اجرا شود؛
-- Refactoring نامرتبط با feature در مرحله افزودن Cash انجام نشود.
+نسخه `01-Without-OOD-Principles` هنگام اضافه‌کردن Cash نباید Refactor شود؛ در نسخه `02-Applied-OOD-Principles` ابتدا SOLID اعمال شود و سپس Cash اضافه شود؛ پیاده‌سازی Cash از نسخه اول نباید مستقیماً به نسخه دوم کپی شود؛ قبل از تغییر کد، Agent باید تغییرات پیشنهادی را توضیح دهد و منتظر تأیید بماند؛ رفتار `credit_card`، `paypal` و `bitcoin` باید حفظ شود؛ پس از تغییرات، `python -m store.main` اجرا شود؛ Refactoring نامرتبط با feature در مرحله افزودن Cash انجام نشود.
 
 این فایل کمک کرد قوانین آزمایش فقط داخل یک Prompt باقی نمانند و در تمام مراحل به‌عنوان context ثابت پروژه در دسترس Agent باشند.
 
@@ -375,14 +361,7 @@ Payment  = paid_by_cash:20.00
 
 `OrderService.process_order()` در نسخه اولیه چند وظیفه مستقل را انجام می‌دهد:
 
-1. بررسی معتبر بودن سفارش؛
-2. محاسبه subtotal؛
-3. محاسبه تخفیف؛
-4. محاسبه shipping؛
-5. اجرای payment؛
-6. تغییر status و persistence؛
-7. ارسال email و SMS؛
-8. فرمت و چاپ receipt.
+بررسی معتبر بودن سفارش؛ محاسبه subtotal؛ محاسبه تخفیف؛ محاسبه shipping؛ اجرای payment؛ تغییر status و persistence؛ ارسال email و SMS؛ فرمت و چاپ receipt.
 
 در نتیجه تغییر قوانین اعتبارسنجی، قیمت‌گذاری، notification یا format receipt همگی می‌توانند باعث تغییر همان کلاس شوند؛ یعنی کلاس بیش از یک reason to change دارد.
 
@@ -390,13 +369,7 @@ Payment  = paid_by_cash:20.00
 
 در نسخه Refactorشده مسئولیت‌ها به componentهای تخصصی منتقل شدند:
 
-- `OrderValidator` در `validators.py`؛
-- `PricingService` در `pricing_service.py`؛
-- `DiscountCalculator` و Ruleهای مستقل؛
-- `PaymentProcessor`؛
-- Repository؛
-- notification senderها؛
-- `ReceiptFormatter` در `receipt.py`.
+`OrderValidator` در `validators.py`؛ `PricingService` در `pricing_service.py`؛ `DiscountCalculator` و Ruleهای مستقل؛ `PaymentProcessor`؛ Repository؛ notification senderها؛ `ReceiptFormatter` در `receipt.py`.
 
 `OrderService` باقی ماند، اما نقش آن به orchestration محدود شد.
 
@@ -469,9 +442,7 @@ Strategy برای این مسئله ساده و مستقیم است؛ هر نو�
 
 سه rule مستقل ایجاد شدند:
 
-- `VipDiscountRule`
-- `VolumeDiscountRule`
-- `CouponDiscountRule`
+`VipDiscountRule`؛ `VolumeDiscountRule`؛ `CouponDiscountRule`.
 
 `DiscountCalculator` آن‌ها را به ترتیب بررسی می‌کند و اولین تخفیف غیرصفر را بازمی‌گرداند.
 
@@ -479,10 +450,7 @@ Strategy برای این مسئله ساده و مستقیم است؛ هر نو�
 
 این مدل ضمن افزایش توسعه‌پذیری، رفتار قبلی را هم حفظ می‌کند. ترتیب قواعد همچنان:
 
-1. VIP → 20%
-2. Volume (`item_count >= 10`) → 10%
-3. `WELCOME10` → 10%
-4. در غیر این صورت صفر
+VIP → 20%؛ Volume (`item_count >= 10`) → 10%؛ `WELCOME10` → 10%؛ در غیر این صورت صفر.
 
 است؛ بنابراین Refactoring باعث ترکیب ناخواسته چند discount نشده است.
 
@@ -697,18 +665,11 @@ receipt_formatter
 
 در این مرحله فقط به تحلیل Agent اکتفا نکردم. OpenCode چند مورد را درست تشخیص داده بود، اما در تحلیل اولیه بعضی design smellها را بیش از حد به اصول SOLID نسبت می‌داد. چند نمونه از خروجی آن این‌ها بودند:
 
-- دسترسی `PaymentProcessor` به `order.customer.credit_card` به‌عنوان DIP گزارش شده بود؛
-- دسترسی `DiscountCalculator` به `order.customer.is_vip` نیز DIP تلقی شده بود؛
-- `PaymentProcessor` به دلیل monolithic بودن به ISP نسبت داده شده بود؛
-- وجود اطلاعات payment در `Customer` به‌عنوان SRP violation قطعی در نظر گرفته شده و استخراج `Wallet` پیشنهاد شده بود.
+دسترسی `PaymentProcessor` به `order.customer.credit_card` به‌عنوان DIP گزارش شده بود؛ دسترسی `DiscountCalculator` به `order.customer.is_vip` نیز DIP تلقی شده بود؛ `PaymentProcessor` به دلیل monolithic بودن به ISP نسبت داده شده بود؛ وجود اطلاعات payment در `Customer` به‌عنوان SRP violation قطعی در نظر گرفته شده و استخراج `Wallet` پیشنهاد شده بود.
 
 این موارد نیاز به اصلاح داشتند، چون:
 
-- direct property access می‌تواند coupling یا Law of Demeter concern باشد، اما به‌تنهایی DIP نیست؛
-- بزرگ‌بودن یک کلاس به‌تنهایی ISP را اثبات نمی‌کند؛
-- entity دارای چند data field لزوماً SRP را نقض نمی‌کند؛
-- `SmsOnlyNotifier` شاهد بسیار روشن‌تری برای ISP است؛
-- concrete construction داخل `OrderService` شاهد اصلی DIP است.
+direct property access می‌تواند coupling یا Law of Demeter concern باشد، اما به‌تنهایی DIP نیست؛ بزرگ‌بودن یک کلاس به‌تنهایی ISP را اثبات نمی‌کند؛ entity دارای چند data field لزوماً SRP را نقض نمی‌کند؛ `SmsOnlyNotifier` شاهد بسیار روشن‌تری برای ISP است؛ concrete construction داخل `OrderService` شاهد اصلی DIP است.
 
 به Agent Prompt اصلاحی داده شد تا از تعریف سخت‌گیرانه‌تر SOLID استفاده کند و design smell را از confirmed SOLID violation جدا نماید. همین تجربه مستقیماً در طراحی Skill مرحله بعد استفاده شد.
 
@@ -738,24 +699,13 @@ receipt_formatter
 
 هدف `solid-review` ایجاد یک workflow تکرارپذیر بود تا Agent قبل از هر Refactoring:
 
-- پروژه را بخواند؛
-- هر یک از پنج اصل را جداگانه تحلیل کند؛
-- به جای مثال‌های textbook، evidence واقعی کد ارائه کند؛
-- دقیقاً فایل، کلاس و متد را مشخص کند؛
-- راهکار حداقلی پیشنهاد دهد؛
-- و بدون تأیید کاربر وارد implementation نشود.
+پروژه را بخواند؛ هر یک از پنج اصل را جداگانه تحلیل کند؛ به جای مثال‌های textbook، evidence واقعی کد ارائه کند؛ دقیقاً فایل، کلاس و متد را مشخص کند؛ راهکار حداقلی پیشنهاد دهد؛ و بدون تأیید کاربر وارد implementation نشود.
 
 ### 18.2 چه اطلاعاتی در اختیار Agent قرار می‌دهد؟
 
 Skill شامل موارد زیر است:
 
-- تعریف دقیق SRP/OCP/LSP/ISP/DIP؛
-- معیارهایی برای تشخیص هر اصل؛
-- فرمت ثابت خروجی شامل Location، Evidence، Consequence، Refactoring، Benefit و Confidence؛
-- قاعده جداسازی smell از SOLID violation؛
-- catalogue کوچک از الگوهای مناسب مثل Strategy، constructor injection، composition و interface segregation؛
-- checklist بررسی رفتار پس از Refactoring؛
-- Approval Gate برای جلوگیری از edit بدون تأیید.
+تعریف دقیق SRP/OCP/LSP/ISP/DIP؛ معیارهایی برای تشخیص هر اصل؛ فرمت ثابت خروجی شامل Location، Evidence، Consequence، Refactoring، Benefit و Confidence؛ قاعده جداسازی smell از SOLID violation؛ catalogue کوچک از الگوهای مناسب مثل Strategy، constructor injection، composition و interface segregation؛ checklist بررسی رفتار پس از Refactoring؛ Approval Gate برای جلوگیری از edit بدون تأیید.
 
 یکی از مهم‌ترین قواعد Skill که مستقیماً از خطای تحلیل اولیه Agent به دست آمد این است:
 
@@ -777,12 +727,7 @@ Skill شامل موارد زیر است:
 
 OpenCode برای اصلاح پنج اصل، Plan چندمرحله‌ای پیشنهاد کرد که در مجموع شامل این جهت‌ها بود:
 
-1. تعریف Protocolها و constructor injection؛
-2. جداکردن validation، pricing و receipt از `OrderService`؛
-3. تبدیل payment به Strategy؛
-4. تبدیل discountها به Rule chain؛
-5. تفکیک notification interfaceها؛
-6. جایگزینی inheritance نامناسب `BundleOrder` با composition.
+تعریف Protocolها و constructor injection؛ جداکردن validation، pricing و receipt از `OrderService`؛ تبدیل payment به Strategy؛ تبدیل discountها به Rule chain؛ تفکیک notification interfaceها؛ جایگزینی inheritance نامناسب `BundleOrder` با composition.
 
 فایل‌های جدید پیشنهادی شامل `ports.py`، `validators.py`، `pricing_service.py`، `receipt.py`، `strategies.py` و `discount_rules.py` بودند؛ این جهت کلی در implementation نهایی نیز دیده می‌شود.
 
@@ -828,12 +773,7 @@ Agent پیشنهاد داده بود `PaymentProcessor()` و `DiscountCalculator
 
 بازبینی نهایی کد نشان می‌دهد جهت کلی Plan اصلاح شد، ولی همه نکات پیشنهادی بالا به‌طور کامل در کد نهایی اعمال نشده‌اند. برای مثال:
 
-- `PaymentProcessor` هنوز در صورت `strategies=None` از `build_payment_strategies()` استفاده می‌کند؛
-- `DiscountCalculator` نیز default rule builder دارد؛
-- نام برخی Protocolها با concreteها یکسان است؛
-- `OrderLike` همچنان متدهای `get_*` دارد؛
-- `PaymentStrategy` هنوز `customer_data: dict` می‌گیرد؛
-- Repository علاوه بر متدهای اصلی، wrapperهای `save/load` دارد.
+`PaymentProcessor` هنوز در صورت `strategies=None` از `build_payment_strategies()` استفاده می‌کند؛ `DiscountCalculator` نیز default rule builder دارد؛ نام برخی Protocolها با concreteها یکسان است؛ `OrderLike` همچنان متدهای `get_*` دارد؛ `PaymentStrategy` هنوز `customer_data: dict` می‌گیرد؛ Repository علاوه بر متدهای اصلی، wrapperهای `save/load` دارد.
 
 این موارد باعث از کار افتادن پروژه نشده‌اند و بخش اصلی Refactoring درست انجام شده است، اما نشان می‌دهند حتی بعد از یک Plan خوب هم نمی‌شود code review نهایی را کنار گذاشت.
 
@@ -863,22 +803,11 @@ Diff source-only بین `baseline` و tag `with-ood-refactor`:
 
 شش فایل source جدید اضافه شدند:
 
-- `discount_rules.py`
-- `ports.py`
-- `pricing_service.py`
-- `receipt.py`
-- `strategies.py`
-- `validators.py`
+`discount_rules.py`؛ `ports.py`؛ `pricing_service.py`؛ `receipt.py`؛ `strategies.py`؛ `validators.py`.
 
 و هفت فایل موجود تغییر کردند:
 
-- `main.py`
-- `models.py`
-- `notification.py`
-- `order_service.py`
-- `payment.py`
-- `pricing.py`
-- `storage.py`
+`main.py`؛ `models.py`؛ `notification.py`؛ `order_service.py`؛ `payment.py`؛ `pricing.py`؛ `storage.py`.
 
 ### 22.1 `OrderService` به orchestrator تبدیل شد
 
@@ -1115,15 +1044,7 @@ PaymentProcessor.process() remains unchanged
 
 بر اساس خروجی‌های Agent و implementation نهایی، موارد زیر به‌درستی شناسایی یا پیشنهاد شدند:
 
-- تشخیص این‌که `OrderService` مسئولیت‌های متعددی دارد و باید به orchestrator سبک‌تری تبدیل شود؛
-- شناسایی زنجیره `if/elif` در `PaymentProcessor` به‌عنوان مشکل توسعه روش‌های پرداخت؛
-- پیشنهاد Strategy برای payment؛
-- شناسایی conditional chain در Discount و پیشنهاد Ruleهای مستقل؛
-- تشخیص مشکل رفتاری `BundleOrder` و ارتباط آن با substitutability؛
-- تشخیص مشکل `SmsOnlyNotifier` که متدهای غیرقابل پشتیبانی به ارث می‌برد؛
-- شناسایی concrete construction در `OrderService` و پیشنهاد constructor injection؛
-- پیشنهاد composition root در `main.py`؛
-- توجه به حفظ اولویت ruleهای تخفیف و رفتار paymentهای قبلی.
+تشخیص این‌که `OrderService` مسئولیت‌های متعددی دارد و باید به orchestrator سبک‌تری تبدیل شود؛ شناسایی زنجیره `if/elif` در `PaymentProcessor` به‌عنوان مشکل توسعه روش‌های پرداخت؛ پیشنهاد Strategy برای payment؛ شناسایی conditional chain در Discount و پیشنهاد Ruleهای مستقل؛ تشخیص مشکل رفتاری `BundleOrder` و ارتباط آن با substitutability؛ تشخیص مشکل `SmsOnlyNotifier` که متدهای غیرقابل پشتیبانی به ارث می‌برد؛ شناسایی concrete construction در `OrderService` و پیشنهاد constructor injection؛ پیشنهاد composition root در `main.py`؛ توجه به حفظ اولویت ruleهای تخفیف و رفتار paymentهای قبلی.
 
 این بخش‌ها مستقیماً با ساختار نهایی کد و خروجی‌های baseline/refactored قابل بررسی‌اند.
 
@@ -1165,13 +1086,7 @@ Agent در Plan گفته بود هر سه payment قبلی با اجرای demo 
 
 Promptهای مؤثر این آزمایش چند ویژگی مشترک داشتند:
 
-- scope دقیق، مثلاً فقط `02-Applied-OOD-Principles`؛
-- تفکیک «تحلیل» از «ویرایش»؛
-- ذکر صریح اینکه Cash هنوز نباید اضافه شود؛
-- درخواست evidence شامل file/class/method؛
-- درخواست حفظ رفتارهای قبلی؛
-- درخواست minimal refactoring و جلوگیری از overengineering؛
-- تعیین approval gate.
+scope دقیق، مثلاً فقط `02-Applied-OOD-Principles`؛ تفکیک «تحلیل» از «ویرایش»؛ ذکر صریح اینکه Cash هنوز نباید اضافه شود؛ درخواست evidence شامل file/class/method؛ درخواست حفظ رفتارهای قبلی؛ درخواست minimal refactoring و جلوگیری از overengineering؛ تعیین approval gate.
 
 نمونه‌ی Prompt مؤثر برای تحلیل:
 
@@ -1240,11 +1155,7 @@ List changed existing files and new classes before implementation.
 
 تأثیر اصلی Skill این بود که خطاهای تحلیل اولیه به ruleهای پایدار تبدیل شدند. برای مثال Skill صریحاً می‌گوید:
 
-- direct property access به‌تنهایی DIP نیست؛
-- large class به‌تنهایی SRP/ISP را ثابت نمی‌کند؛
-- data-rich entity به‌تنهایی SRP violation نیست؛
-- برای هر finding باید evidence و location واقعی ارائه شود؛
-- implementation بدون approval انجام نشود.
+direct property access به‌تنهایی DIP نیست؛ large class به‌تنهایی SRP/ISP را ثابت نمی‌کند؛ data-rich entity به‌تنهایی SRP violation نیست؛ برای هر finding باید evidence و location واقعی ارائه شود؛ implementation بدون approval انجام نشود.
 
 در عمل، Skill قرار نبود جواب SOLID را از قبل به Agent بدهد؛ بیشتر نقش یک چارچوب تحلیل را داشت تا پاسخ‌ها قابل پیگیری و بازبینی باشند و Agent برای هر ادعا به بخش مشخصی از کد اشاره کند.
 
@@ -1256,13 +1167,7 @@ List changed existing files and new classes before implementation.
 
 در اجرای مجدد، این تغییرات را اعمال می‌کنم:
 
-1. از ابتدا `__pycache__/` و `*.pyc` را در `.gitignore` قرار می‌دهم تا تاریخچه و آمار diff آلوده نشوند.
-2. قبل از Build، Plan نهایی را به یک فایل مستقل مثل `REFACTORING_PLAN.md` ذخیره می‌کنم تا تفاوت Plan اولیه، اصلاحات انسانی و Plan نهایی دقیق‌تر قابل ردیابی باشد.
-3. همه sessionهای موفق OpenCode را همان لحظه export می‌کنم؛ در repository فعلی فقط session اولیه شامل خطاهای 403 موجود است.
-4. به جای اتکا به demo، از ابتدا چند تست/Smoke test مستقل برای credit card، PayPal، Bitcoin، unknown method، discount priority و Bundle می‌نویسم.
-5. بعد از Plan اصلاح‌شده، یک review صریح انجام می‌دهم تا اطمینان حاصل شود مواردی مثل default concrete builder، `customer_data: dict` و protocol naming واقعاً قبل از Build اصلاح شده‌اند.
-6. در Skill، Constraint تکراری مربوط به registry را حذف می‌کنم.
-7. قرارداد `ReceiptFormatter` را با استفاده واقعی `OrderService` هماهنگ می‌کنم؛ در وضعیت فعلی Protocol فقط `format()` را تعریف می‌کند در حالی که `OrderService` روی dependency خود `print()` را صدا می‌زند.
+از ابتدا `__pycache__/` و `*.pyc` را در `.gitignore` قرار می‌دهم تا تاریخچه و آمار diff آلوده نشوند؛ قبل از Build، Plan نهایی را به یک فایل مستقل مثل `REFACTORING_PLAN.md` ذخیره می‌کنم تا تفاوت Plan اولیه، اصلاحات انسانی و Plan نهایی دقیق‌تر قابل ردیابی باشد؛ همه sessionهای موفق OpenCode را همان لحظه export می‌کنم؛ در repository فعلی فقط session اولیه شامل خطاهای 403 موجود است؛ به جای اتکا به demo، از ابتدا چند تست/Smoke test مستقل برای credit card، PayPal، Bitcoin، unknown method، discount priority و Bundle می‌نویسم؛ بعد از Plan اصلاح‌شده، یک review صریح انجام می‌دهم تا اطمینان حاصل شود مواردی مثل default concrete builder، `customer_data: dict` و protocol naming واقعاً قبل از Build اصلاح شده‌اند؛ در Skill، Constraint تکراری مربوط به registry را حذف می‌کنم؛ قرارداد `ReceiptFormatter` را با استفاده واقعی `OrderService` هماهنگ می‌کنم؛ در وضعیت فعلی Protocol فقط `format()` را تعریف می‌کند در حالی که `OrderService` روی dependency خود `print()` را صدا می‌زند.
 
 این موارد دقیقاً از مشکلات واقعی مشاهده‌شده در این آزمایش استخراج شده‌اند، نه از توصیه‌های عمومی.
 
@@ -1272,25 +1177,11 @@ List changed existing files and new classes before implementation.
 
 ## 32. نقاط قوت نسخه Refactorشده
 
-- `OrderService` دیگر concrete dependencyها را نمی‌سازد؛
-- validation و receipt از workflow اصلی جدا شده‌اند؛
-- payment behavior به Strategyهای مستقل منتقل شده است؛
-- discount ruleها مستقل شده و ترتیب قبلی حفظ شده است؛
-- `BundleOrder` دیگر inheritance معیوب ندارد و total واقعی تولید می‌کند؛
-- `SmsOnlyNotifier` فقط operation قابل پشتیبانی خود را ارائه می‌کند؛
-- Cash بدون تغییر `PaymentProcessor.process()` اضافه شده است؛
-- خروجی Order 101 قبل و بعد برابر باقی مانده است؛
-- هر چهار payment method در smoke-test نهایی کار می‌کنند.
+`OrderService` دیگر concrete dependencyها را نمی‌سازد؛ validation و receipt از workflow اصلی جدا شده‌اند؛ payment behavior به Strategyهای مستقل منتقل شده است؛ discount ruleها مستقل شده و ترتیب قبلی حفظ شده است؛ `BundleOrder` دیگر inheritance معیوب ندارد و total واقعی تولید می‌کند؛ `SmsOnlyNotifier` فقط operation قابل پشتیبانی خود را ارائه می‌کند؛ Cash بدون تغییر `PaymentProcessor.process()` اضافه شده است؛ خروجی Order 101 قبل و بعد برابر باقی مانده است؛ هر چهار payment method در smoke-test نهایی کار می‌کنند.
 
 ## 33. محدودیت‌ها و موارد قابل بهبود
 
-- test suite خودکار در نسخه تحویلی وجود ندارد؛
-- برخی abstractionها از حداقل لازم پیچیده‌ترند؛
-- default builderها بخشی از concrete knowledge را داخل Payment/Discount نگه داشته‌اند؛
-- `PaymentStrategy` از dictionary استفاده می‌کند که type safety کمتری از domain object دارد؛
-- `ports.py` هم contract و هم بعضی data classها را در خود نگه می‌دارد که separation تمیزتری می‌تواند داشته باشد؛
-- Protocol `ReceiptFormatter` با متدی که `OrderService` واقعاً فراخوانی می‌کند کاملاً هم‌راستا نیست؛
-- فایل‌های bytecode در Git track شده‌اند و باید در آینده حذف شوند.
+test suite خودکار در نسخه تحویلی وجود ندارد؛ برخی abstractionها از حداقل لازم پیچیده‌ترند؛ default builderها بخشی از concrete knowledge را داخل Payment/Discount نگه داشته‌اند؛ `PaymentStrategy` از dictionary استفاده می‌کند که type safety کمتری از domain object دارد؛ `ports.py` هم contract و هم بعضی data classها را در خود نگه می‌دارد که separation تمیزتری می‌تواند داشته باشد؛ Protocol `ReceiptFormatter` با متدی که `OrderService` واقعاً فراخوانی می‌کند کاملاً هم‌راستا نیست؛ فایل‌های bytecode در Git track شده‌اند و باید در آینده حذف شوند.
 
 این محدودیت‌ها نتیجه اصلی آزمایش را از بین نمی‌برند، اما باعث می‌شوند ادعا نشود که نسخه دوم «معماری کامل و بی‌نقص» است.
 
@@ -1362,6 +1253,12 @@ python -m store.main
 مقایسه Cash نتیجه جالبی داشت: تعداد فایل‌ها و حتی تعداد خطوط تغییرکرده در نسخه SOLID کمتر نشد. در نسخه اولیه `14+ / 2-` و در نسخه SOLID `17+ / 2-` ثبت شد. با این حال تفاوت معماری مهم این است که در حالت دوم برای Cash منطق مرکزی `PaymentProcessor.process()` تغییر نکرد و behavior جدید در کلاس مستقلی قرار گرفت. بنابراین SOLID در این مثال بیشتر از اینکه حجم کدنویسی را کاهش دهد، محل اثر تغییر و coupling را محدود کرد.
 
 از طرف دیگر، OpenCode برای پیدا کردن مسیر کلی Refactoring و ساخت Plan کمک زیادی کرد، اما تحلیل اولیه‌اش چند دسته‌بندی اشتباه داشت و خود Plan هم بدون بازبینی قابل اجرا نبود. Skill سفارشی باعث شد تحلیل‌ها منظم‌تر و قابل بررسی‌تر شوند، ولی همچنان code review انسانی لازم بود. تجربه این آزمایش برای من این بود که AI Coding Agent زمانی بیشترین ارزش را دارد که نقش دستیار تحلیل و اجرا را داشته باشد، نه اینکه تصمیم‌های طراحی بدون بررسی به آن واگذار شوند.
+
+---
+
+## 37. چک‌لیست تطابق با صورت آزمایش
+
+موارد انجام‌شده در این آزمایش شامل دو نسخه مستقل از پروژه اولیه ایجاد شد؛ Cash ابتدا روی نسخه بدون SOLID اضافه شد؛ تمام فایل‌های تغییرکرده در مرحله اول ثبت و مقایسه شدند؛ هر پنج اصل SRP، OCP، LSP، ISP و DIP تحلیل شدند؛ برای موارد نقض، علت، روش اصلاح و دلیل انتخاب راهکار توضیح داده شد؛ Skill اختصاصی برای تحلیل SOLID طراحی شد؛ هدف Skill، اطلاعاتی که به Agent می‌دهد و دلیل ساختار آن توضیح داده شد؛ Plan قبل از Refactoring تهیه و بازبینی شد؛ موارد نیازمند اصلاح در تحلیل و Plan Agent مستند شدند؛ Refactoring نسخه دوم در checkpoint جدا ثبت شد؛ Cash پس از Refactoring دوباره اضافه شد؛ تغییرات Cash در دو نسخه به‌صورت کمی و کیفی مقایسه شدند؛ عملکرد OpenCode، خطاهای آن، Promptهای مؤثر و اثر Skill ارزیابی شدند؛ پیشنهادهای مشخص برای اجرای بهتر آزمایش در تکرار بعدی ارائه شد؛ خروجی‌ها و diffهای اصلی در پوشه `evidence` نگهداری شده‌اند است.
 
 
 </div>
