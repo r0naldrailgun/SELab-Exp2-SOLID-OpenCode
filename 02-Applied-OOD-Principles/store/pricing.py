@@ -1,17 +1,21 @@
-from store.models import Order
+from typing import List
+from store.ports import DiscountCalculator, DiscountRule, DiscountContext, OrderLike
+from store.discount_rules import build_discount_rules
 
 
 class DiscountCalculator:
-    def calculate(self, order: Order) -> float:
-        subtotal = order.subtotal
+    def __init__(self, rules: List[DiscountRule] = None):
+        self.rules = rules or build_discount_rules()
 
-        if order.customer.is_vip:
-            discount = subtotal * 0.20
-        elif order.item_count >= 10:
-            discount = subtotal * 0.10
-        elif "WELCOME10" in order.coupons:
-            discount = subtotal * 0.10
-        else:
-            discount = 0.0
-
-        return round(discount, 2)
+    def calculate(self, order: OrderLike) -> float:
+        context = DiscountContext(
+            subtotal=order.get_subtotal(),
+            item_count=order.get_item_count(),
+            is_vip=order.customer.is_vip,
+            coupons=order.coupons,
+        )
+        for rule in self.rules:
+            discount = rule.apply(context)
+            if discount > 0:
+                return discount
+        return 0.0

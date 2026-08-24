@@ -1,5 +1,14 @@
 from store.models import BundleOrder, Customer, Order, OrderItem
 from store.order_service import OrderService
+from store.validators import OrderValidator
+from store.pricing_service import PricingService
+from store.pricing import DiscountCalculator
+from store.payment import PaymentProcessor
+from store.strategies import build_payment_strategies
+from store.discount_rules import build_discount_rules
+from store.storage import MySqlDatabase
+from store.notification import NotificationService
+from store.receipt import ReceiptFormatter
 
 
 def build_demo_orders():
@@ -29,7 +38,25 @@ def build_demo_orders():
 
 
 def main() -> None:
-    service = OrderService()
+    # Composition root - wire all dependencies
+    validator = OrderValidator()
+    discount_calculator = DiscountCalculator(rules=build_discount_rules())
+    pricing = PricingService(discount_calculator)
+    payment_processor = PaymentProcessor(strategies=build_payment_strategies())
+    notification = NotificationService()
+    repository = MySqlDatabase()
+    receipt_formatter = ReceiptFormatter()
+
+    service = OrderService(
+        validator=validator,
+        pricing=pricing,
+        payment=payment_processor,
+        email_sender=notification,
+        sms_sender=notification,
+        repository=repository,
+        receipt_formatter=receipt_formatter,
+    )
+
     laptop, books, bundle = build_demo_orders()
 
     print(">>> Checkout a simple order")

@@ -1,29 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List
-
-
-@dataclass
-class Customer:
-    id: int
-    name: str
-    email: str
-    phone: str = ""
-    is_vip: bool = False
-    address: str = ""
-    credit_card: str = ""
-    bitcoin_address: str = ""
-
-
-@dataclass
-class OrderItem:
-    product_id: int
-    name: str
-    price: float
-    quantity: int
-
-    @property
-    def line_total(self) -> float:
-        return self.price * self.quantity
+from store.ports import OrderLike, Customer, OrderItem
 
 
 @dataclass
@@ -43,8 +20,32 @@ class Order:
     def item_count(self) -> int:
         return sum(item.quantity for item in self.items)
 
+    # OrderLike protocol methods
+    def get_items(self) -> List[OrderItem]:
+        return self.items
 
-class BundleOrder(Order):
+    def get_subtotal(self) -> float:
+        return self.subtotal
+
+    def get_item_count(self) -> int:
+        return self.item_count
+
+
+class BundleOrder:
     def __init__(self, id: int, customer: Customer, orders: List[Order]):
-        super().__init__(id=id, customer=customer, items=[])
+        self.id = id
+        self.customer = customer
         self.orders = orders
+        self.status = "pending"
+        self.payment_method = ""
+        self.coupons = []
+
+    # OrderLike protocol methods
+    def get_items(self) -> List[OrderItem]:
+        return [item for order in self.orders for item in order.items]
+
+    def get_subtotal(self) -> float:
+        return sum(order.get_subtotal() for order in self.orders)
+
+    def get_item_count(self) -> int:
+        return sum(order.get_item_count() for order in self.orders)
