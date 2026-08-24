@@ -1,30 +1,37 @@
+<div dir="rtl" align="right">
+
 # گزارش آزمایش دوم آزمایشگاه مهندسی نرم‌افزار
 
 ## بررسی عملی اصول SOLID و ارزیابی OpenCode به‌عنوان AI Coding Agent
 
-**نام دانشجو:** امیرهمایون شریفی زاده 
-**شماره دانشجویی:** 401106114  
+نام دانشجو: امیرهمایون شریفی زاده 
+شماره دانشجویی: 401106114  
 
 ---
 
 ## 1. هدف آزمایش
 
-این آزمایش دو هدف اصلی داشت. هدف اول، بررسی عملی اصول طراحی شی‌گرای **SOLID** بود؛ به این معنا که صرفاً تعریف پنج اصل مطالعه نشود، بلکه موارد نقض آن‌ها در یک پروژه واقعی پیدا، تحلیل و با Refactoring مناسب اصلاح شوند. هدف دوم، استفاده کنترل‌شده از **OpenCode** به‌عنوان یک AI Coding Agent بود تا مشخص شود چنین ابزاری در تحلیل معماری، تولید Plan، اعمال تغییرات و پیشنهاد Refactoring تا چه اندازه مفید است و در چه نقاطی همچنان به بازبینی انسان نیاز دارد.
+در این آزمایش دو کار اصلی انجام دادم. اول، اصول SOLID را روی یک پروژه واقعی بررسی کردم تا فقط در حد تعریف‌های تئوری باقی نماند و بتوانم موارد نقض را در خود کد پیدا کنم، دلیل آن‌ها را توضیح بدهم و با Refactoring مناسب اصلاحشان کنم. در کنار آن، از OpenCode به‌عنوان AI Coding Agent استفاده کردم تا ببینم در تحلیل معماری، ساخت Plan و اعمال Refactoring چقدر قابل اتکاست و در چه جاهایی هنوز نیاز به بررسی و تصمیم‌گیری انسانی دارد.
 
-برای اینکه اثر SOLID فقط در سطح نظری بررسی نشود، قابلیت جدید **پرداخت نقدی (`cash`)** دو بار به پروژه اضافه شد:
+برای اینکه اثر SOLID فقط در سطح نظری بررسی نشود، قابلیت جدید پرداخت نقدی (`cash`) دو بار به پروژه اضافه شد:
 
 1. یک بار روی نسخه اولیه و بدون اصلاح معماری؛
 2. یک بار پس از Refactoring نسخه دوم بر اساس اصول SOLID.
 
-در پایان، میزان و نوع تغییرات لازم برای افزودن همان قابلیت در دو معماری مقایسه شد. این مقایسه نشان می‌دهد مزیت SOLID لزوماً «کم‌شدن تعداد خطوط کد» نیست، بلکه مهم‌تر از آن **محدودشدن محل اثر تغییر، کاهش coupling و امکان افزودن رفتار جدید بدون دست‌کاری منطق مرکزی موجود** است.
+در پایان، میزان و نوع تغییرات لازم برای افزودن همان قابلیت در دو معماری مقایسه شد. این مقایسه نشان می‌دهد مزیت SOLID لزوماً «کم‌شدن تعداد خطوط کد» نیست، بلکه مهم‌تر از آن محدودشدن محل اثر تغییر، کاهش coupling و امکان افزودن رفتار جدید بدون دست‌کاری منطق مرکزی موجود است.
 
-در تمام مراحل، خروجی OpenCode به‌عنوان پیشنهاد در نظر گرفته شد، نه پاسخ نهایی. تحلیل‌ها، Plan و تغییرات Agent بازبینی شدند و در چند مورد نیز به‌صورت مشخص اصلاح یا محدود شدند.
+در طول کار، خروجی OpenCode را پاسخ قطعی در نظر نگرفتم. تحلیل‌ها، Planها و تغییرات پیشنهادی را بررسی کردم و هرجا لازم بود، پیشنهاد Agent را اصلاح یا محدود کردم.
 
 ---
 
 ## 2. ساختار نهایی پروژه
 
 ساختار اصلی تحویل به شکل زیر است:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 2/
@@ -73,6 +80,11 @@
         └── session-01.json
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 دو پوشه‌ی `01-Without-OOD-Principles` و `02-Applied-OOD-Principles` از یک baseline مشترک ساخته شدند؛ بنابراین نسخه دوم از نسخه اولِ دارای Cash کپی نشده و مقایسه دو آزمایش مستقل باقی مانده است.
 
 ---
@@ -89,7 +101,7 @@
 | `99359ac` — `with-ood-refactor` | اعمال Refactoring روی نسخه دوم، پیش از Cash |
 | `0eaff4f` — `with-ood-cash` | افزودن Cash به نسخه Refactorشده |
 
-این ترتیب برای اعتبار مقایسه مهم است؛ زیرا نشان می‌دهد Cash در نسخه دوم **پس از** ثبت نسخه SOLID-only اضافه شده است.
+این ترتیب برای اعتبار مقایسه مهم است؛ زیرا نشان می‌دهد Cash در نسخه دوم پس از ثبت نسخه SOLID-only اضافه شده است.
 
 ### نکته درباره آمار Git
 
@@ -108,15 +120,15 @@
 - فایل `AGENTS.md` برای دادن context و قوانین پایدار پروژه به Agent؛
 - مفهوم Agent و تفاوت نقش تحلیل/برنامه‌ریزی با اجرای تغییر؛
 - Skill برای تعریف workflow تخصصی پروژه؛
-- استفاده از **Plan mode** برای تحلیل و طراحی قبل از edit؛
-- استفاده از **Build mode** برای اعمال Plan تأییدشده؛
+- استفاده از Plan mode برای تحلیل و طراحی قبل از edit؛
+- استفاده از Build mode برای اعمال Plan تأییدشده؛
 - نوشتن Promptهای صریح درباره scope، محدودیت‌ها، خروجی مورد انتظار و شرط تأیید انسانی.
 
 ### تجربه عملی نصب روی Windows
 
-OpenCode از طریق npm نصب شد. در PowerShell به دلیل Execution Policy اجرای wrapper با نام `opencode.ps1` مسدود بود، بنابراین از `opencode.cmd` استفاده شد. نسخه ثبت‌شده در session export موجود، **OpenCode 1.18.22** است.
+OpenCode از طریق npm نصب شد. در PowerShell به دلیل Execution Policy اجرای wrapper با نام `opencode.ps1` مسدود بود، بنابراین از `opencode.cmd` استفاده شد. نسخه ثبت‌شده در session export موجود، OpenCode 1.18.22 است.
 
-در تلاش اولیه برای مدل‌های رایگان Zen، مدل‌های `nemotron-3-ultra-free` و `mimo-v2.5-free` با پاسخ `403 Forbidden` مواجه شدند. این رخداد در `evidence/opencode-sessions/session-01.json` ثبت شده است. فایل session موجود فقط این تلاش‌های اولیه را پوشش می‌دهد و همه تعامل‌های موفق بعدی در export قرار نگرفته‌اند؛ بنابراین در این گزارش برای ادعاهای فنی، علاوه بر تعامل‌های ثبت‌شده، از **Git history، diffها، کد نهایی و خروجی اجرای واقعی** به‌عنوان شواهد اصلی استفاده شده است.
+در تلاش اولیه برای مدل‌های رایگان Zen، مدل‌های `nemotron-3-ultra-free` و `mimo-v2.5-free` با پاسخ `403 Forbidden` مواجه شدند. این رخداد در `evidence/opencode-sessions/session-01.json` ثبت شده است. فایل session موجود فقط این تلاش‌های اولیه را پوشش می‌دهد و همه تعامل‌های موفق بعدی در export قرار نگرفته‌اند؛ بنابراین در این گزارش برای ادعاهای فنی، علاوه بر تعامل‌های ثبت‌شده، از Git history، diffها، کد نهایی و خروجی اجرای واقعی به‌عنوان شواهد اصلی استفاده شده است.
 
 ---
 
@@ -132,7 +144,7 @@ OpenCode از طریق npm نصب شد. در PowerShell به دلیل Execution 
 - پس از تغییرات، `python -m store.main` اجرا شود؛
 - Refactoring نامرتبط با feature در مرحله افزودن Cash انجام نشود.
 
-وجود این فایل باعث شد محدودیت‌های آزمایش از یک Prompt منفرد فراتر بروند و به context پایدار پروژه تبدیل شوند.
+این فایل کمک کرد قوانین آزمایش فقط داخل یک Prompt باقی نمانند و در تمام مراحل به‌عنوان context ثابت پروژه در دسترس Agent باشند.
 
 ---
 
@@ -142,15 +154,30 @@ OpenCode از طریق npm نصب شد. در PowerShell به دلیل Execution 
 
 پروژه اولیه از داخل هر پوشه با دستور زیر اجرا می‌شود:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```powershell
 python -m store.main
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 خروجی baseline در `evidence/original-baseline.txt` ذخیره شده است.
 
 دو مشاهده مهم در baseline وجود داشت:
 
 ### سفارش عادی شماره 101
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Subtotal = $1024.99
@@ -159,11 +186,21 @@ Shipping = $0.00
 Total    = $819.99
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 این رفتار پس از Refactoring نیز باید حفظ می‌شد.
 
 ### Bundle شماره 103
 
 در نسخه اولیه خروجی Bundle به صورت زیر بود:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Subtotal = $0.00
@@ -171,6 +208,11 @@ Discount = $0.00
 Shipping = $5.00
 Total    = $5.00
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 این نتیجه از رفتار `BundleOrder` ناشی می‌شد. کلاس مذکور از `Order` ارث می‌برد، اما در سازنده‌ی parent مقدار `items=[]` قرار می‌داد. بنابراین propertyهای inherited مثل `subtotal` و `item_count` محتوای واقعی سفارش‌های داخلی را نمی‌دیدند. این رفتار در ادامه به‌عنوان شاهد اصلی نقض LSP استفاده شد.
 
@@ -180,7 +222,7 @@ Total    = $5.00
 
 ## 7. هدف این مرحله
 
-در این مرحله **عمداً معماری اصلاح نشد**. هدف این بود که مشخص شود اگر سیستم در طراحی اولیه باقی بماند، افزودن یک روش پرداخت جدید دقیقاً کدام قسمت‌های موجود را مجبور به تغییر می‌کند.
+در این مرحله عمداً معماری اصلاح نشد. هدف این بود که مشخص شود اگر سیستم در طراحی اولیه باقی بماند، افزودن یک روش پرداخت جدید دقیقاً کدام قسمت‌های موجود را مجبور به تغییر می‌کند.
 
 قید اصلی برای Agent این بود:
 
@@ -192,7 +234,12 @@ Total    = $5.00
 
 ### 8.1 تغییر `PaymentProcessor`
 
-در `01-Without-OOD-Principles/store/payment.py` روش پرداخت توسط یک زنجیره `if/elif` انتخاب می‌شود. برای Cash لازم شد **همان متد موجود** ویرایش شود:
+در `01-Without-OOD-Principles/store/payment.py` روش پرداخت توسط یک زنجیره `if/elif` انتخاب می‌شود. برای Cash لازم شد همان متد موجود ویرایش شود:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```python
 elif method == "cash":
@@ -200,11 +247,21 @@ elif method == "cash":
     return f"paid_by_cash:{amount:.2f}"
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 این تغییر مهم‌ترین شاهد تجربی OCP در این آزمایش است: هر روش پرداخت جدید باعث اضافه‌شدن branch دیگری به منطق مرکزی موجود می‌شود.
 
 ### 8.2 تغییر Demo در `main.py`
 
 برای مشاهده قابلیت جدید، سفارش 104 ساخته شد:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```python
 cash_order = Order(
@@ -214,6 +271,11 @@ cash_order = Order(
     items=[OrderItem(5, "Notebook", 15.00, 1)],
 )
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 و سپس توسط `OrderService` پردازش شد.
 
@@ -230,24 +292,49 @@ cash_order = Order(
 
 Diff بین tagهای `baseline` و `without-ood-cash` فقط برای فایل‌های منبع:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 2 files changed, 14 insertions(+), 2 deletions(-)
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 جزئیات:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 main.py     +10 / -2
 payment.py  +4  / -0
 ```
 
-مهم‌تر از تعداد خط‌ها این است که **فایل مرکزی پرداخت (`payment.py`) مجبور به تغییر شد**.
+</div>
+
+<div dir="rtl" align="right">
+
+
+مهم‌تر از تعداد خط‌ها این است که فایل مرکزی پرداخت (`payment.py`) مجبور به تغییر شد.
 
 ---
 
 ## 10. خروجی Cash در نسخه اولیه
 
 سفارش Cash دارای یک Notebook به قیمت 15 دلار است. با توجه به قانون ارسال، چون subtotal کمتر از 100 دلار است، 5 دلار هزینه ارسال اضافه می‌شود:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Subtotal = $15.00
@@ -256,6 +343,11 @@ Shipping = $5.00
 Total    = $20.00
 Payment  = paid_by_cash:20.00
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 اجرای نهایی نسخه اول این خروجی را تأیید می‌کند.
 
@@ -269,11 +361,11 @@ Payment  = paid_by_cash:20.00
 
 | اصل | رعایت شده؟ | محل اصلی در پروژه | توضیح کوتاه |
 |---|---|---|---|
-| **SRP** | خیر | `store/order_service.py` / `OrderService` | اعتبارسنجی، pricing، shipping، payment، persistence، notification و receipt در یک workflow متمرکز شده‌اند. |
-| **OCP** | خیر | `store/payment.py` و `store/pricing.py` | افزودن روش پرداخت یا rule تخفیف جدید نیازمند ویرایش زنجیره شرط‌های موجود است. |
-| **LSP** | خیر | `store/models.py` / `BundleOrder` | subtype مانند `Order` عادی رفتار نمی‌کند؛ subtotal و item_count آن عملاً صفر می‌شوند. |
-| **ISP** | خیر | `store/notification.py` / `SmsOnlyNotifier` | notifier فقط-SMS مجبور به داشتن متدهای email و push شده و برای آن‌ها exception می‌دهد. |
-| **DIP** | خیر | `store/order_service.py` / `OrderService.__init__()` | سرویس سطح بالا concrete dependencyهای خود را مستقیماً می‌سازد. |
+| SRP | خیر | `store/order_service.py` / `OrderService` | اعتبارسنجی، pricing، shipping، payment، persistence، notification و receipt در یک workflow متمرکز شده‌اند. |
+| OCP | خیر | `store/payment.py` و `store/pricing.py` | افزودن روش پرداخت یا rule تخفیف جدید نیازمند ویرایش زنجیره شرط‌های موجود است. |
+| LSP | خیر | `store/models.py` / `BundleOrder` | subtype مانند `Order` عادی رفتار نمی‌کند؛ subtotal و item_count آن عملاً صفر می‌شوند. |
+| ISP | خیر | `store/notification.py` / `SmsOnlyNotifier` | notifier فقط-SMS مجبور به داشتن متدهای email و push شده و برای آن‌ها exception می‌دهد. |
+| DIP | خیر | `store/order_service.py` / `OrderService.__init__()` | سرویس سطح بالا concrete dependencyهای خود را مستقیماً می‌سازد. |
 
 ---
 
@@ -306,7 +398,7 @@ Payment  = paid_by_cash:20.00
 - notification senderها؛
 - `ReceiptFormatter` در `receipt.py`.
 
-`OrderService` باقی ماند، اما نقش آن به **orchestration** محدود شد.
+`OrderService` باقی ماند، اما نقش آن به orchestration محدود شد.
 
 ### دلیل انتخاب راهکار
 
@@ -322,11 +414,21 @@ Payment  = paid_by_cash:20.00
 
 در baseline، `PaymentProcessor.process()` شامل branchهای زیر بود:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 credit_card
 paypal
 bitcoin
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 برای Cash نیز مجبور شدیم `elif` چهارم اضافه کنیم. بنابراین extension مستقیم به modification منجر شد.
 
@@ -334,12 +436,22 @@ bitcoin
 
 در نسخه دوم، رفتار پرداخت به Strategyهای مستقل منتقل شد:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 CreditCardStrategy
 PayPalStrategy
 BitcoinStrategy
 CashStrategy   ← بعداً اضافه شد
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 `PaymentProcessor` یک mapping از key روش پرداخت به Strategy دریافت می‌کند و دیگر منطق اختصاصی card/PayPal/Bitcoin را در `process()` ندارد.
 
@@ -382,6 +494,11 @@ Strategy برای این مسئله ساده و مستقیم است؛ هر نو�
 
 در baseline:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```python
 class BundleOrder(Order):
     def __init__(self, id, customer, orders):
@@ -389,26 +506,51 @@ class BundleOrder(Order):
         self.orders = orders
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 هر کدی که یک `Order` دریافت می‌کند انتظار دارد `subtotal` و `item_count` نماینده آیتم‌های واقعی سفارش باشند. ولی جایگزین‌کردن `Order` با `BundleOrder` این فرض را می‌شکند.
 
 شاهد رفتاری آن output واقعی baseline است:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Bundle subtotal = 0.00
 Bundle total    = 5.00
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 همچنین در validation یک special case وجود داشت:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```python
 if not order.items and not isinstance(order, BundleOrder):
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 یعنی client برای کارکردن با subtype مجبور بود نوع خاص آن را بشناسد.
 
 ### روش اصلاح
 
-در نسخه جدید `BundleOrder` دیگر از `Order` ارث نمی‌برد و از **composition** استفاده می‌کند. هر دو نوع از طریق قرارداد ساختاری `OrderLike` قابل استفاده‌اند. Bundle آیتم‌ها، subtotal و تعداد آیتم‌های child orderها را تجمیع می‌کند.
+در نسخه جدید `BundleOrder` دیگر از `Order` ارث نمی‌برد و از composition استفاده می‌کند. هر دو نوع از طریق قرارداد ساختاری `OrderLike` قابل استفاده‌اند. Bundle آیتم‌ها، subtotal و تعداد آیتم‌های child orderها را تجمیع می‌کند.
 
 ### دلیل انتخاب
 
@@ -418,12 +560,22 @@ if not order.items and not isinstance(order, BundleOrder):
 
 در `evidence/02-after-solid.txt`، Bundle شماره 103 چنین محاسبه می‌شود:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 Subtotal = $1194.99
 Discount = $239.00
 Shipping = $0.00
 Total    = $955.99
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 تغییر از 5 دلار به 955.99 دلار regression ناخواسته نیست؛ 5 دلار نتیجه defect طراحی baseline بود.
 
@@ -435,6 +587,11 @@ Total    = $955.99
 
 در نسخه اولیه:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 NotificationService
 ├── send_email
@@ -442,17 +599,32 @@ NotificationService
 └── send_push
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 اما `SmsOnlyNotifier` فقط SMS را پشتیبانی می‌کرد و برای دو متد دیگر `NotImplementedError` ایجاد می‌کرد. این یعنی implementation مجبور به قبول interfaceای بزرگ‌تر از نیاز خود شده بود.
 
 ### روش اصلاح
 
 در `ports.py` قراردادهای کوچک جدا تعریف شدند:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 EmailSender
 SmsSender
 PushSender
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 و `SmsOnlyNotifier` در نسخه جدید فقط `send_sms` دارد و دیگر متدهای غیرقابل پشتیبانی را به ارث نمی‌برد.
 
@@ -468,6 +640,11 @@ PushSender
 
 در نسخه اولیه `OrderService.__init__()` مستقیماً concreteها را می‌سازد:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```python
 self.discount_calculator = DiscountCalculator()
 self.payment_processor = PaymentProcessor()
@@ -475,11 +652,21 @@ self.notification = NotificationService()
 self.database = MySqlDatabase()
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 در نتیجه high-level workflow با انتخاب implementationهای low-level درهم تنیده شده است.
 
 ### روش اصلاح
 
 در نسخه دوم dependencyها از constructor وارد می‌شوند:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 validator
@@ -491,7 +678,12 @@ repository
 receipt_formatter
 ```
 
-ساخت concreteها در `main.py` انجام می‌شود که نقش **Composition Root** را دارد.
+</div>
+
+<div dir="rtl" align="right">
+
+
+ساخت concreteها در `main.py` انجام می‌شود که نقش Composition Root را دارد.
 
 ### دلیل انتخاب
 
@@ -503,7 +695,7 @@ receipt_formatter
 
 ## 17. چرا تحلیل اولیه Agent بدون اصلاح پذیرفته نشد؟
 
-یکی از مهم‌ترین بخش‌های آزمایش، ارزیابی خود Agent بود. در تحلیل اولیه OpenCode چند تشخیص درست وجود داشت، اما برخی smellها بیش از حد به SOLID نسبت داده شده بودند. نمونه‌های ثبت‌شده در خروجی Agent عبارت بودند از:
+در این مرحله فقط به تحلیل Agent اکتفا نکردم. OpenCode چند مورد را درست تشخیص داده بود، اما در تحلیل اولیه بعضی design smellها را بیش از حد به اصول SOLID نسبت می‌داد. چند نمونه از خروجی آن این‌ها بودند:
 
 - دسترسی `PaymentProcessor` به `order.customer.credit_card` به‌عنوان DIP گزارش شده بود؛
 - دسترسی `DiscountCalculator` به `order.customer.is_vip` نیز DIP تلقی شده بود؛
@@ -512,13 +704,13 @@ receipt_formatter
 
 این موارد نیاز به اصلاح داشتند، چون:
 
-- direct property access می‌تواند coupling یا Law of Demeter concern باشد، اما **به‌تنهایی DIP نیست**؛
+- direct property access می‌تواند coupling یا Law of Demeter concern باشد، اما به‌تنهایی DIP نیست؛
 - بزرگ‌بودن یک کلاس به‌تنهایی ISP را اثبات نمی‌کند؛
 - entity دارای چند data field لزوماً SRP را نقض نمی‌کند؛
 - `SmsOnlyNotifier` شاهد بسیار روشن‌تری برای ISP است؛
 - concrete construction داخل `OrderService` شاهد اصلی DIP است.
 
-به Agent Prompt اصلاحی داده شد تا از تعریف سخت‌گیرانه‌تر SOLID استفاده کند و **design smell** را از **confirmed SOLID violation** جدا نماید. همین تجربه مستقیماً در طراحی Skill مرحله بعد استفاده شد.
+به Agent Prompt اصلاحی داده شد تا از تعریف سخت‌گیرانه‌تر SOLID استفاده کند و design smell را از confirmed SOLID violation جدا نماید. همین تجربه مستقیماً در طراحی Skill مرحله بعد استفاده شد.
 
 ---
 
@@ -528,9 +720,19 @@ receipt_formatter
 
 مسیر Skill پروژه:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 .opencode/skills/solid-review/SKILL.md
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 ### 18.1 هدف Skill چیست؟
 
@@ -618,7 +820,7 @@ Agent پیشنهاد داده بود `PaymentProcessor()` و `DiscountCalculator
 
 اجرای `store.main` به‌تنهایی PayPal و Bitcoin را واقعاً process نمی‌کرد. بنابراین درخواست شد verification صریح برای `credit_card`، `paypal`، `bitcoin` و unknown method انجام شود.
 
-این مرحله نشان می‌دهد Plan mode فقط برای «تولید برنامه» استفاده نشد؛ بلکه امکان بررسی design قبل از تغییر فایل‌ها را فراهم کرد.
+برای من کاربرد اصلی Plan mode همین بود: قبل از اینکه فایلی تغییر کند، می‌شد طرح Agent را بررسی کرد، ایرادهایش را دید و بعد درباره اجرای آن تصمیم گرفت.
 
 ---
 
@@ -633,7 +835,7 @@ Agent پیشنهاد داده بود `PaymentProcessor()` و `DiscountCalculator
 - `PaymentStrategy` هنوز `customer_data: dict` می‌گیرد؛
 - Repository علاوه بر متدهای اصلی، wrapperهای `save/load` دارد.
 
-این موارد برنامه را خراب نمی‌کنند و اصول اصلی مورد آزمایش تا حد زیادی اصلاح شده‌اند، اما نشان می‌دهند که **خروجی Agent حتی پس از یک Plan خوب هم نیازمند code review نهایی است**. این موضوع یکی از نتایج مهم ارزیابی OpenCode در این آزمایش است.
+این موارد باعث از کار افتادن پروژه نشده‌اند و بخش اصلی Refactoring درست انجام شده است، اما نشان می‌دهند حتی بعد از یک Plan خوب هم نمی‌شود code review نهایی را کنار گذاشت.
 
 ---
 
@@ -645,9 +847,19 @@ Agent پیشنهاد داده بود `PaymentProcessor()` و `DiscountCalculator
 
 Diff source-only بین `baseline` و tag `with-ood-refactor`:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 13 files changed, 358 insertions(+), 108 deletions(-)
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 شش فایل source جدید اضافه شدند:
 
@@ -672,6 +884,11 @@ Diff source-only بین `baseline` و tag `with-ood-refactor`:
 
 نسخه نهایی به جای ساخت concreteها، dependencyها را در constructor دریافت می‌کند و `process_order` مراحل زیر را هماهنگ می‌کند:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 validate
   ↓
@@ -685,6 +902,11 @@ notify
   ↓
 receipt
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 ### 22.2 Payment Strategy
 
@@ -734,6 +956,11 @@ receipt
 
 در این مرحله دیگر نیازی نبود `PaymentProcessor.process()` تغییر کند. رفتار جدید در Strategy مستقل اضافه شد:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```python
 class CashStrategy:
     def process(self, customer_data: dict, amount: float) -> str:
@@ -741,11 +968,26 @@ class CashStrategy:
         return f"paid_by_cash:{amount:.2f}"
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 سپس این Strategy در mapping موجود ثبت شد:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```python
 "cash": CashStrategy(),
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 و همان Demo سفارش 104 به `main.py` اضافه شد.
 
@@ -760,18 +1002,38 @@ class CashStrategy:
 
 Diff بین `with-ood-refactor` و `with-ood-cash` فقط برای source:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 2 files changed, 17 insertions(+), 2 deletions(-)
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 جزئیات:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 main.py       +10 / -2
 strategies.py +7  / -0
 ```
 
-نکته مهم این است که تعداد فایل‌های production لمس‌شده نسبت به نسخه اولیه کمتر نشده است؛ در هر دو حالت دو فایل تغییر کرده‌اند. حتی تعداد خط‌های افزوده‌شده در نسخه SOLID کمی بیشتر است. **بهبود اصلی در نوع تغییر است، نه صرفاً تعداد خطوط**.
+</div>
+
+<div dir="rtl" align="right">
+
+
+نکته مهم این است که تعداد فایل‌های production لمس‌شده نسبت به نسخه اولیه کمتر نشده است؛ در هر دو حالت دو فایل تغییر کرده‌اند. حتی تعداد خط‌های افزوده‌شده در نسخه SOLID کمی بیشتر است. بهبود اصلی در نوع تغییر است، نه صرفاً تعداد خطوط.
 
 ---
 
@@ -783,9 +1045,9 @@ strategies.py +7  / -0
 |---|---|---|
 | فایل‌های source تغییرکرده | 2 | 2 |
 | Insertions / Deletions | `+14 / -2` | `+17 / -2` |
-| تغییر `PaymentProcessor.process()` | **بله** | **خیر** |
-| افزودن branch جدید به dispatch مرکزی | **بله، یک `elif`** | **خیر** |
-| رفتار Cash در کلاس مستقل | خیر | **بله، `CashStrategy`** |
+| تغییر `PaymentProcessor.process()` | بله | خیر |
+| افزودن branch جدید به dispatch مرکزی | بله، یک `elif` | خیر |
+| رفتار Cash در کلاس مستقل | خیر | بله، `CashStrategy` |
 | تغییر Demo | بله | بله |
 | تغییر registration/wiring | ساختار registry وجود نداشت | بله، یک entry در mapping |
 | ریسک اثر روی منطق روش‌های قبلی | بیشتر | کمتر |
@@ -797,6 +1059,11 @@ strategies.py +7  / -0
 
 #### قبل از SOLID
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 Add Cash
    ↓
@@ -807,7 +1074,17 @@ Edit existing if/elif dispatch
 Central payment algorithm changes
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 #### بعد از SOLID
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Add Cash
@@ -819,11 +1096,16 @@ Register strategy
 PaymentProcessor.process() remains unchanged
 ```
 
-بنابراین اثر اصلی SOLID در این آزمایش **کاهش modification pressure روی منطق پایدار** است.
+</div>
+
+<div dir="rtl" align="right">
+
+
+بنابراین اثر اصلی SOLID در این آزمایش کاهش modification pressure روی منطق پایدار است.
 
 ### محدودیت OCP در نسخه نهایی
 
-نسخه دوم هنوز برای ثبت strategy جدید، تابع `build_payment_strategies()` را ویرایش می‌کند. بنابراین معماری را نمی‌توان «کاملاً بدون modification» دانست؛ بلکه **dispatch algorithm** بسته به تغییر شده و wiring هنوز صریح است. برای پروژه آموزشی کوچک این trade-off قابل قبول است و از ایجاد framework/registry پیچیده جلوگیری می‌کند.
+نسخه دوم هنوز برای ثبت strategy جدید، تابع `build_payment_strategies()` را ویرایش می‌کند. بنابراین معماری را نمی‌توان «کاملاً بدون modification» دانست؛ بلکه dispatch algorithm بسته به تغییر شده و wiring هنوز صریح است. برای پروژه آموزشی کوچک این trade-off قابل قبول است و از ایجاد framework/registry پیچیده جلوگیری می‌کند.
 
 ---
 
@@ -875,7 +1157,7 @@ default ساختن concrete strategy/rule داخل componentها پیشنهاد 
 
 Agent در Plan گفته بود هر سه payment قبلی با اجرای demo تأیید می‌شوند، در حالی که demo اصلی PayPal و Bitcoin را واقعاً process نمی‌کرد. بنابراین smoke-test مستقیم لازم بود.
 
-این مثال‌ها نشان می‌دهند Agent در تشخیص جهت معماری مفید بود، ولی کیفیت نتیجه زمانی بهتر شد که Prompt دقیق‌تر و code review انسانی اضافه شد.
+در مجموع، Agent جهت کلی معماری را خوب پیدا کرد، اما نتیجه زمانی قابل اعتمادتر شد که Promptها دقیق‌تر شدند و خروجی آن با code review انسانی بررسی شد.
 
 ---
 
@@ -893,6 +1175,11 @@ Promptهای مؤثر این آزمایش چند ویژگی مشترک داشت�
 
 نمونه‌ی Prompt مؤثر برای تحلیل:
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```text
 Analyze SRP, OCP, LSP, ISP and DIP separately.
 For every confirmed violation give the exact file, class/method,
@@ -901,7 +1188,17 @@ Separate design smells from actual SOLID violations.
 Do not modify files and do not add cash yet.
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 نمونه‌ی Prompt مؤثر برای Plan:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Use the solid-review Skill.
@@ -911,7 +1208,17 @@ Keep OrderService as an orchestrator.
 Do not implement anything until I approve the plan.
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 نمونه‌ی Prompt مؤثر برای افزودن Cash پس از SOLID:
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Add the same cash payment capability using the existing extension points.
@@ -919,6 +1226,11 @@ Do not add an if/elif branch to PaymentProcessor.
 Do not redesign the architecture.
 List changed existing files and new classes before implementation.
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 در مقابل، Prompt عمومی مانند «SOLID problems را fix کن» کنترل کافی روی scope، رفتار و معیار قبول/رد نمی‌دهد.
 
@@ -934,7 +1246,7 @@ List changed existing files and new classes before implementation.
 - برای هر finding باید evidence و location واقعی ارائه شود؛
 - implementation بدون approval انجام نشود.
 
-در نتیجه Skill بیشتر از اینکه «جواب SOLID» را در اختیار Agent بگذارد، **روش تحلیل** را محدود و استاندارد می‌کند. این موضوع کیفیت پاسخ‌ها را از نظر traceability و قابلیت review بهتر کرد.
+در عمل، Skill قرار نبود جواب SOLID را از قبل به Agent بدهد؛ بیشتر نقش یک چارچوب تحلیل را داشت تا پاسخ‌ها قابل پیگیری و بازبینی باشند و Agent برای هر ادعا به بخش مشخصی از کد اشاره کند.
 
 با این حال، Skill جای code review را نگرفت. باقی‌ماندن برخی compromiseها در کد نهایی و تناقض کوچک Constraint مربوط به registry نشان می‌دهد حتی یک Skill خوب هم تضمین‌کننده design بی‌نقص نیست.
 
@@ -944,7 +1256,7 @@ List changed existing files and new classes before implementation.
 
 در اجرای مجدد، این تغییرات را اعمال می‌کنم:
 
-1. **از ابتدا `__pycache__/` و `*.pyc` را در `.gitignore` قرار می‌دهم** تا تاریخچه و آمار diff آلوده نشوند.
+1. از ابتدا `__pycache__/` و `*.pyc` را در `.gitignore` قرار می‌دهم تا تاریخچه و آمار diff آلوده نشوند.
 2. قبل از Build، Plan نهایی را به یک فایل مستقل مثل `REFACTORING_PLAN.md` ذخیره می‌کنم تا تفاوت Plan اولیه، اصلاحات انسانی و Plan نهایی دقیق‌تر قابل ردیابی باشد.
 3. همه sessionهای موفق OpenCode را همان لحظه export می‌کنم؛ در repository فعلی فقط session اولیه شامل خطاهای 403 موجود است.
 4. به جای اتکا به demo، از ابتدا چند تست/Smoke test مستقل برای credit card، PayPal، Bitcoin، unknown method، discount priority و Bundle می‌نویسم.
@@ -1005,17 +1317,37 @@ List changed existing files and new classes before implementation.
 
 ### نسخه بدون SOLID
 
+
+</div>
+
+<div dir="ltr" align="left">
+
 ```powershell
 cd .\01-Without-OOD-Principles
 python -m store.main
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
+
 ### نسخه SOLID
+
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```powershell
 cd .\02-Applied-OOD-Principles
 python -m store.main
 ```
+
+</div>
+
+<div dir="rtl" align="right">
+
 
 ---
 
@@ -1023,31 +1355,13 @@ python -m store.main
 
 ## 36. جمع‌بندی نهایی
 
-در نسخه اولیه، اضافه‌کردن یک روش پرداخت جدید مستلزم تغییر مستقیم `PaymentProcessor.process()` و رشد زنجیره `if/elif` بود. همان بررسی همچنین مشکلات مشخص دیگری را نشان داد: تمرکز مسئولیت‌ها در `OrderService`، ruleهای شرطی Discount، inheritance نامعتبر `BundleOrder`، interface بزرگ Notification و ساخت concrete dependencyها در high-level service.
+در نسخه اولیه، برای اضافه‌کردن یک روش پرداخت جدید مجبور بودم مستقیماً `PaymentProcessor.process()` را تغییر بدهم و یک شاخه دیگر به زنجیره `if/elif` اضافه کنم. بررسی همان نسخه چند مشکل دیگر را هم روشن کرد؛ از جمله تمرکز چند مسئولیت در `OrderService`، شرط‌های ثابت Discount، inheritance نامناسب `BundleOrder`، interface بزرگ Notification و ساخت مستقیم dependencyهای concrete در سرویس سطح بالا.
 
 پس از Refactoring، مسئولیت‌ها بهتر تفکیک شدند، `OrderService` نقش orchestrator گرفت، Payment بر اساس Strategy کار کرد، Discount بر اساس Ruleها توسعه‌پذیر شد، Bundle با composition رفتار صحیح پیدا کرد و dependencyها از Composition Root تزریق شدند.
 
-مقایسه Cash نتیجه جالبی داشت: تعداد فایل‌ها و حتی تعداد خطوط تغییرکرده در نسخه SOLID کمتر نشد. در نسخه اولیه `14+ / 2-` و در نسخه SOLID `17+ / 2-` ثبت شد. با این حال تفاوت معماری مهم این است که در حالت دوم برای Cash **منطق مرکزی `PaymentProcessor.process()` تغییر نکرد** و behavior جدید در کلاس مستقلی قرار گرفت. بنابراین SOLID در این مثال بیشتر از اینکه حجم کدنویسی را کاهش دهد، **محل اثر تغییر و coupling را محدود کرد**.
+مقایسه Cash نتیجه جالبی داشت: تعداد فایل‌ها و حتی تعداد خطوط تغییرکرده در نسخه SOLID کمتر نشد. در نسخه اولیه `14+ / 2-` و در نسخه SOLID `17+ / 2-` ثبت شد. با این حال تفاوت معماری مهم این است که در حالت دوم برای Cash منطق مرکزی `PaymentProcessor.process()` تغییر نکرد و behavior جدید در کلاس مستقلی قرار گرفت. بنابراین SOLID در این مثال بیشتر از اینکه حجم کدنویسی را کاهش دهد، محل اثر تغییر و coupling را محدود کرد.
 
-از طرف دیگر، OpenCode در شناسایی جهت‌های اصلی Refactoring و ایجاد Plan مفید بود، اما تحلیل اولیه چند مورد را اشتباه دسته‌بندی کرد و Plan نیز نیازمند بازبینی معماری بود. Skill سفارشی کیفیت و ساختار تحلیل را بهتر کرد، ولی code review انسانی همچنان ضروری باقی ماند. بنابراین مهم‌ترین تجربه این آزمایش درباره AI Coding Agent این بود که بهترین نتیجه زمانی حاصل می‌شود که Agent برای **تحلیل، پیشنهاد و اجرای کنترل‌شده** استفاده شود، نه به‌عنوان مرجع نهایی طراحی.
+از طرف دیگر، OpenCode برای پیدا کردن مسیر کلی Refactoring و ساخت Plan کمک زیادی کرد، اما تحلیل اولیه‌اش چند دسته‌بندی اشتباه داشت و خود Plan هم بدون بازبینی قابل اجرا نبود. Skill سفارشی باعث شد تحلیل‌ها منظم‌تر و قابل بررسی‌تر شوند، ولی همچنان code review انسانی لازم بود. تجربه این آزمایش برای من این بود که AI Coding Agent زمانی بیشترین ارزش را دارد که نقش دستیار تحلیل و اجرا را داشته باشد، نه اینکه تصمیم‌های طراحی بدون بررسی به آن واگذار شوند.
 
----
 
-## 37. چک‌لیست تطابق با صورت آزمایش
-
-- [x] دو نسخه مستقل از پروژه اولیه ایجاد شد.
-- [x] Cash ابتدا روی نسخه بدون SOLID اضافه شد.
-- [x] تمام فایل‌های تغییرکرده در مرحله اول ثبت و مقایسه شدند.
-- [x] هر پنج اصل SRP، OCP، LSP، ISP و DIP تحلیل شدند.
-- [x] برای موارد نقض، علت، روش اصلاح و دلیل انتخاب راهکار توضیح داده شد.
-- [x] Skill اختصاصی برای تحلیل SOLID طراحی شد.
-- [x] هدف Skill، اطلاعاتی که به Agent می‌دهد و دلیل ساختار آن توضیح داده شد.
-- [x] Plan قبل از Refactoring تهیه و بازبینی شد.
-- [x] موارد نیازمند اصلاح در تحلیل و Plan Agent مستند شدند.
-- [x] Refactoring نسخه دوم در checkpoint جدا ثبت شد.
-- [x] Cash پس از Refactoring دوباره اضافه شد.
-- [x] تغییرات Cash در دو نسخه به‌صورت کمی و کیفی مقایسه شدند.
-- [x] عملکرد OpenCode، خطاهای آن، Promptهای مؤثر و اثر Skill ارزیابی شدند.
-- [x] پیشنهادهای مشخص برای اجرای بهتر آزمایش در تکرار بعدی ارائه شد.
-- [x] خروجی‌ها و diffهای اصلی در پوشه `evidence` نگهداری شده‌اند.
-
+</div>
